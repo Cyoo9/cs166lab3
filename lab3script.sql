@@ -1,3 +1,5 @@
+-- part 1 drop tables -- 
+
 DROP TABLE Professor CASCADE;
 DROP TABLE Dept CASCADE;
 DROP TABLE work_dept CASCADE;
@@ -7,6 +9,9 @@ DROP TABLE Graduate CASCADE;
 DROP TABLE work_proj CASCADE;
 DROP TABLE advise CASCADE;
 
+-- part 2 drop tables -- 
+
+-- part 1 code -- 
 CREATE TABLE Professor( ssn CHAR(11) NOT NULL, 
 			name CHAR(30) NOT NULL, 
 			age INTEGER NOT NULL, 
@@ -46,23 +51,35 @@ CREATE TABLE work_in(   ssn CHAR(11) NOT NULL,
 			FOREIGN KEY(pno) REFERENCES Project(pno)); 
 
   		
-CREATE TABLE Graduate(SSN CHAR(11), 
+CREATE TABLE Graduate(  ssn_grad CHAR(11), 
+			ssn CHAR(11) NOT NULL, 
 			dno INTEGER NOT NULL,
 			name CHAR(30), 
 			age INTEGER, 
 			deg_pg CHAR(20), 
-			PRIMARY KEY(SSN), 
-			FOREIGN KEY (dno) REFERENCES Dept(dno) 
+			PRIMARY KEY(ssn_grad), 
+			FOREIGN KEY (dno) REFERENCES Dept(dno),
+ 			FOREIGN KEY (ssn) REFERENCES Professor(ssn)
 			); 
 
 CREATE TABLE work_proj ( pno INTEGER NOT NULL, 
-		 	 SSN CHAR(11) NOT NULL, 
-			 PRIMARY KEY(pno, SSN), 
+		 	 ssn_grad CHAR(11) NOT NULL, 
+			 PRIMARY KEY(pno, ssn_grad), 
 			 FOREIGN KEY(pno) REFERENCES Project(pno), 
-			 FOREIGN KEY(SSN) REFERENCES Graduate(SSN));
+			 FOREIGN KEY(ssn_grad) REFERENCES Graduate(ssn_grad));
 
-CREATE TABLE advise (SSN CHAR(11) NOT NULL, 
-			PRIMARY KEY(SSN),
-			FOREIGN KEY(SSN) REFERENCES Graduate(SSN));  
+CREATE TABLE advise (ssn_grad CHAR(11) NOT NULL, 
+			PRIMARY KEY(ssn_grad),
+			FOREIGN KEY(ssn_grad) REFERENCES Graduate(ssn_grad));  
+
+-- part 2 code -- 
+
+
+
+
+
+
+
+
 
 
