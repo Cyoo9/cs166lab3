@@ -32,4 +32,27 @@ CREATE TABLE work_dept ( time_pc CHAR(20) NOT NULL,
 			 FOREIGN KEY(ssn) REFERENCES Professor(ssn), 
 			 FOREIGN KEY(dno) REFERENCES Dept(dno));  
 
+CREATE TABLE runs ( ssn CHAR(11) NOT NULL, 
+		    dno INTEGER NOT NULL, 
+		    PRIMARY KEY(ssn, dno), 
+		    FOREIGN KEY(ssn) REFERENCES Professor(ssn), 
+		    FOREIGN KEY(dno) REFERENCES Dept(dno)); 
+
+CREATE TABLE Project (  pno INTEGER NOT NULL, 
+		        sponsor CHAR(30) NOT NULL, 
+			start_date CHAR(11) NOT NULL, 
+			end_date CHAR(11) NOT NULL, 
+			budget INTEGER NOT NULL, 
+			ssn CHAR(11) NOT NULL, 
+			PRIMARY KEY(pno), 
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn)); 
+
+CREATE TABLE work_in(   ssn CHAR(11) NOT NULL, 
+			pno INTEGER NOT NULL, 
+			PRIMARY KEY(ssn, pno),
+			FOREIGN KEY(ssn) REFERENCES Professor(ssn), 
+			FOREIGN KEY(pno) REFERENCES Project(pno)); 
+
+CREATE TABLE manage( 		
+
 
