@@ -53,6 +53,32 @@ CREATE TABLE work_in(   ssn CHAR(11) NOT NULL,
 			FOREIGN KEY(ssn) REFERENCES Professor(ssn), 
 			FOREIGN KEY(pno) REFERENCES Project(pno)); 
 
-CREATE TABLE manage( 		
+CREATE TABLE manage( ssn CHAR(11) NOT NULL,
+                        pno INTEGER NOT NULL,
+                        PRIMARY KEY(ssn, pno),
+                        FOREIGN KEY(ssn) REFERENCES Professor(ssn),
+                        FOREIGN KEY(pno) REFERENCES Project(pno));
+  		
+CREATE TABLE Graduate(SSN CHAR(11) NOT NULL, 
+			name CHAR(30) NOT NULL, 
+			age INTEGER NOT NULL, 
+			deg_pg CHAR(20) NOT NULL, 
+			PRIMARY KEY(SSN)); 
 
+CREATE TABLE supervise ( ssn CHAR(11) NOT NULL,
+                        pno INTEGER NOT NULL,
+			SSN CHAR(11) NOT NULL, 
+                        PRIMARY KEY(ssn, pno, SSN),
+                        FOREIGN KEY(ssn) REFERENCES Professor(ssn),
+                        FOREIGN KEY(pno) REFERENCES Project(pno)
+			FOREIGN KEY(SSN) REFERENCES Graduate(SSN));;
 
+CREATE TABLE major (SSN CHAR(11) NOT NULL, 
+			dno INTEGER NOT NULL, 
+			PRIMARY KEY(SSN, dno), 
+			FOREIGN KEY(SSN) REFERENCES Graduate(SSN), 
+			FOREIGN KEY(dno) REFERENCES Dept));
+
+CREATE TABLE advise (SSN CHAR(11) NOT NULL, 
+			PRIMARY KEY(SSN),
+			FOREIGN KEY(SSN) REFERENCES Graduate(SSN));  
