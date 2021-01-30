@@ -11,6 +11,16 @@ DROP TABLE advise CASCADE;
 
 -- part 2 drop tables -- 
 
+/* DROP TABLE Place CASCADE;
+DROP TABLE Telephone CASCADE; 
+DROP TABLE Musicians CASCADE;
+DROP TABLE Lives CASCADE;
+DROP TABLE Instrument CASCADE;
+DROP TABLE Plays CASCADE; 
+DROP TABLE Album CASCADE;
+DROP TABLE Songs CASCADE; 
+DROP TABLE Perform CASCADE; */ 
+
 -- part 1 code -- 
 CREATE TABLE Professor( ssn CHAR(11) NOT NULL, 
 			name CHAR(30) NOT NULL, 
@@ -74,8 +84,63 @@ CREATE TABLE advise (ssn_grad CHAR(11) NOT NULL,
 
 -- part 2 code -- 
 
+DROP TABLE Place CASCADE; 
+DROP TABLE Musicians CASCADE;
+DROP TABLE Lives CASCADE;
+DROP TABLE Instrument CASCADE;
+DROP TABLE Plays CASCADE;
+DROP TABLE Album CASCADE;
+DROP TABLE Songs CASCADE;
+DROP TABLE Perform CASCADE;
 
 
+CREATE TABLE Place (phone_no CHAR(11), 
+			address CHAR(30) NOT NULL,
+			PRIMARY KEY(address));   
+
+CREATE TABLE Musicians(name CHAR(30) NOT NULL, 
+			ssn CHAR(11) NOT NULL, 
+			PRIMARY KEY (ssn)); 
+
+CREATE TABLE Lives (address CHAR(30) NOT NULL, 
+			ssn CHAR(11) NOT NULL, 
+			PRIMARY KEY(address, ssn), 
+			FOREIGN KEY(address) REFERENCES Place(address), 
+			FOREIGN KEY(ssn) REFERENCES Musicians(ssn)); 
+
+CREATE TABLE Instrument ( instrId CHAR(11) NOT NULL, 
+			key CHAR(11), 
+			dname CHAR(30), 
+			PRIMARY KEY(instrId)); 
+
+CREATE TABLE Plays (ssn CHAR(11) NOT NULL, 
+			instrId CHAR(11) NOT NULL, 
+			PRIMARY KEY (ssn, instrId), 
+			FOREIGN KEY (ssn) REFERENCES Musicians(ssn), 
+			FOREIGN KEY (instrId) REFERENCES Instrument(instrId));  
+
+CREATE TABLE Album (albumIdentifier CHAR(11), 
+			speed INTEGER, 
+			copyrightDate CHAR(11), 
+			title CHAR(30), 
+			ssn CHAR(11) NOT NULL,
+			PRIMARY KEY (albumIdentifier), 
+			FOREIGN KEY(ssn) REFERENCES Musicians(ssn)); 
+
+CREATE TABLE Songs (songId CHAR(11), 
+			song_title CHAR(30), 
+			author CHAR(30), 
+			albumIdentifier CHAR(11) NOT NULL, 
+			PRIMARY KEY (songId), 
+			FOREIGN KEY (albumIdentifier) REFERENCES Album(albumIdentifier)); 
+
+CREATE TABLE Perform ( ssn CHAR(11) NOT NULL, 
+			songId CHAR(11) NOT NULL, 
+			PRIMARY KEY (ssn, songId), 
+			FOREIGN KEY (ssn) REFERENCES Musicians(ssn), 
+			FOREIGN KEY (songId) REFERENCES Songs (songId)); 
+
+			
 
 
 
