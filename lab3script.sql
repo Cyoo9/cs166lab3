@@ -1,5 +1,3 @@
--- part 1 drop tables -- 
-
 DROP TABLE Professor CASCADE;
 DROP TABLE Dept CASCADE;
 DROP TABLE work_dept CASCADE;
@@ -8,18 +6,6 @@ DROP TABLE work_in CASCADE;
 DROP TABLE Graduate CASCADE;
 DROP TABLE work_proj CASCADE;
 DROP TABLE advise CASCADE;
-
--- part 2 drop tables -- 
-
-/* DROP TABLE Place CASCADE;
-DROP TABLE Telephone CASCADE; 
-DROP TABLE Musicians CASCADE;
-DROP TABLE Lives CASCADE;
-DROP TABLE Instrument CASCADE;
-DROP TABLE Plays CASCADE; 
-DROP TABLE Album CASCADE;
-DROP TABLE Songs CASCADE; 
-DROP TABLE Perform CASCADE; */ 
 
 -- part 1 code -- 
 CREATE TABLE Professor( ssn CHAR(11) NOT NULL, 
